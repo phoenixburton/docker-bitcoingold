@@ -1,10 +1,9 @@
-FROM debian:stable-slim
+FROM bitsler/wallet-base:focal
 
 ENV HOME /bitcoingold
 
 ENV USER_ID 1000
 ENV GROUP_ID 1000
-ENV BTG_VERSION=0.15.2
 
 RUN groupadd -g ${GROUP_ID} bitcoingold \
   && useradd -u ${USER_ID} -g bitcoingold -s /bin/bash -m -d /bitcoingold bitcoingold \
@@ -12,6 +11,9 @@ RUN groupadd -g ${GROUP_ID} bitcoingold \
   && apt-get update -y \
   && apt-get install -y curl gosu \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ARG version=0.15.2
+ENV BTG_VERSION=$version
 
 RUN curl -sL https://github.com/BTCGPU/BTCGPU/releases/download/v$BTG_VERSION/bitcoin-gold-$BTG_VERSION-x86_64-linux-gnu.tar.gz | tar xz --strip=2 -C /usr/local/bin
 
