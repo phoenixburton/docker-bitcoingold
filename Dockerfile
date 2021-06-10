@@ -12,7 +12,7 @@ RUN groupadd -g ${GROUP_ID} bitcoingold \
   && apt-get install -y curl gosu \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ARG version=0.15.2
+ARG version=0.17.3
 ENV BTG_VERSION=$version
 
 RUN curl -sL https://github.com/BTCGPU/BTCGPU/releases/download/v$BTG_VERSION/bitcoin-gold-$BTG_VERSION-x86_64-linux-gnu.tar.gz | tar xz --strip=2 -C /usr/local/bin
